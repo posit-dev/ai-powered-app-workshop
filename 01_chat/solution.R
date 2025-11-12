@@ -4,7 +4,11 @@
 library(ellmer)
 
 # ---- Anthropic ----
-chat_anthropic <- chat_anthropic()
-chat_anthropic$chat(
+chat_session <- chat_anthropic(
+  api_key = ""  # Paste your API Key between the quotes
+)
+chat_session$chat(
   "Who are you?"
 )
+
+rm(chat_session) # closes chat

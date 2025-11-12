@@ -9,10 +9,14 @@ weathR::point_forecast(posit_conf$lat, posit_conf$lon)
 # ---- ⚒️ Let's turn this into a tool 🛠️ ----
 library(ellmer)
 
-ellmer::create_tool_def(weathR::point_forecast, verbose = TRUE)
+ellmer::create_tool_def(
+  weathR::point_forecast,
+  chat = chat_anthropic(), 
+  verbose = TRUE
+)
 
 get_weather <- tool(
-  \(lat, lon) weathR::point_forecast(lat, lon),
+  function(lat, lon) weathR::point_forecast(lat, lon),
   name = "point_forecast",
   description = "Get forecast data for a specific latitude and longitude.",
   arguments = list(
@@ -25,9 +29,9 @@ get_weather <- tool(
 get_weather(posit_conf$lat, posit_conf$lon)
 
 # ---- 🧰 Teach an LLM that we have this tool ----
-chat <- chat_anthropic(echo = "output")
+chat_weather <- chat_anthropic(echo = "output")
 
 # Register the tool with the chatbot
-chat$register_tool(get_weather)
+chat_weather$register_tool(get_weather)
 
-chat$chat("What should I pack for my trip to Paris, France this week?")
+chat_weather$chat("What should I pack for my trip to Brooklyn, New York this week?")

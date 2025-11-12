@@ -5,7 +5,7 @@ library(shinychat)
 library(weathR)
 
 get_weather <- tool(
-  \(lat, lon) weathR::point_forecast(lat, lon),
+  function(lat, lon) weathR::point_forecast(lat, lon),
   name = "get_weather",
   description = "Get forecast data for a specific latitude and longitude.",
   arguments = list(
