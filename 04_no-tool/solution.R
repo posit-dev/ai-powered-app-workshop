@@ -3,4 +3,4 @@ library(ellmer)
 
 chat_session <- chat_anthropic(echo = "output")
 
-chat_session$chat("What is the weather today in Brooklyn, New York?")
+chat_session$chat("What will the weather be tomorrow in Brooklyn, New York?")

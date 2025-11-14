@@ -16,7 +16,7 @@ ellmer::create_tool_def(
 )
 
 get_weather <- tool(
-  function(lat, lon) weathR::point_forecast(lat, lon),
+  function(lat, lon) weathR::point_tomorrow(lat, lon),
   name = "point_forecast",
   description = "Get forecast data for a specific latitude and longitude.",
   arguments = list(
@@ -34,4 +34,4 @@ chat_weather <- chat_anthropic(echo = "output")
 # Register the tool with the chatbot
 chat_weather$register_tool(get_weather)
 
-chat_weather$chat("What should I pack for my trip to Brooklyn, New York this week?")
+chat_weather$chat("What will the weather be tomorrow in Brooklyn, New York?")

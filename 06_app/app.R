@@ -5,7 +5,7 @@ library(shinychat)
 library(weathR)
 
 get_weather <- tool(
-  function(lat, lon) weathR::point_forecast(lat, lon),
+  function(lat, lon) weathR::point_tomorrow(lat, lon),
   name = "get_weather",
   description = "Get forecast data for a specific latitude and longitude.",
   arguments = list(
@@ -15,6 +15,7 @@ get_weather <- tool(
 )
 
 ui <- page_fillable(
+  "Hello, I'm weatherbot. Can I help you look up the weather for a location in the United States?",
   chat_mod_ui("chat")
 )
 
