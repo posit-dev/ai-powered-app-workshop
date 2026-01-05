@@ -11,4 +11,5 @@ chat_session$chat(
   "Who are you?"
 )
 
-rm(chat_session) # closes chat
+# Closes chat. Do not close yet.
+# rm(chat_session)

@@ -5,7 +5,6 @@ posit_conf <- list(lat = 33.761627, lon = -84.386963)
 
 weathR::point_forecast(posit_conf$lat, posit_conf$lon)
 
-
 # ---- ⚒️ Let's turn this into a tool 🛠️ ----
 library(ellmer)
 

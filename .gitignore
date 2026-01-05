@@ -1,6 +1,7 @@
 # History files
 .Rhistory
 .Rapp.history
+.posit
 
 # Session Data files
 .RData
@@ -47,3 +48,6 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+.Rprofile
+00_manual-app/renv.lock
+00_manual-app/renv/

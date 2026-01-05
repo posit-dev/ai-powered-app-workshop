@@ -5,13 +5,14 @@ library(ggplot2)
 library(leaflet)
 library(shinychat)
 library(ellmer)
+library(readr)
 source("helpers.R")
 
 
 
 ui <- page_sidebar(
   sidebar = sidebar(
-    "Hello, I'm weatherbot. Can I help you look up the weather for a location in the United States?",
+    "Hello, I'm weatherbot. May I help you check the forecast for a location in the United States?",
     chat_mod_ui("chat")
   ),
   layout_columns( 
@@ -37,6 +38,7 @@ server <- function(input, output, session) {
       as.data.frame()
 
     # update reactive objects to share data with Shiny app
+    # rv(val) syntax updates the value of rv with val
     data(weather_data)
     latitude(lat)
     longitude(lon)
@@ -59,7 +61,7 @@ server <- function(input, output, session) {
   )
 
   client <- ellmer::chat_anthropic(
-    system_prompt = interpolate_file("prompt.md"),
+    system_prompt = readr::read_file("prompt.md"),
     echo = "all"
   )
   client$register_tool(get_weather)
