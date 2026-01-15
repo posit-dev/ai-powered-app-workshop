@@ -11,7 +11,7 @@ ui <- page_fillable(
 
 server <- function(input, output, session) {
   client <- ellmer::chat_anthropic(
-    system_prompt = readr::read_file("04_system-prompt/prompt.md")
+    system_prompt = ellmer::interpolate_file("04_system-prompt/prompt.md")
   )
   chat_mod_server("chat", client)
 }

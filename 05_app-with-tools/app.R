@@ -21,7 +21,7 @@ ui <- page_fillable(
 
 server <- function(input, output, session) {
   client <- ellmer::chat_anthropic(
-    system_prompt = readr::read_file("05_system-prompt/prompt.md")
+    system_prompt = ellmer::interpolate_file("05_system-prompt/prompt.md")
   )
   client$______________(get_weather) ## Register the tool
 
