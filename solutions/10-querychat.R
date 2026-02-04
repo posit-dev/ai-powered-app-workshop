@@ -10,7 +10,7 @@ georgia_mortality <- read.csv("data/georgia_mortality.csv")
 georgia_population <- read.csv("data/georgia_population.csv")
 
 # Step 1: Initialize QueryChat
-qc <- QueryChat$new(georgia_mortality, client = "anthropic/claude-sonnet-4-5-20250929", greeting = "Hi")
+qc <- QueryChat$new(georgia_mortality, greeting = "How can I help you explore cancer mortality in Georgia?")
 
 
 ui <- page_sidebar(
