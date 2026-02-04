@@ -54,3 +54,4 @@ rsconnect/
 data/raw/us_cancer_mortality_county_long_12-09-2025.csv
 data/raw/us_sociodemographics_county_long_12-09-2025.csv
 ai-powered-app-workshop.Rproj
+data/.DS_Store
