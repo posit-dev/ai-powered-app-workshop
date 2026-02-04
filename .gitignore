@@ -51,3 +51,5 @@ rsconnect/
 .Rprofile
 00_manual-app/renv.lock
 00_manual-app/renv/
+data/raw/us_cancer_mortality_county_long_12-09-2025.csv
+data/raw/us_sociodemographics_county_long_12-09-2025.csv
