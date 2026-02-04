@@ -19,7 +19,7 @@ ui <- page_sidebar(
 server <- function(input, output) {
 
   output$hist <- renderPlot({
-    hist(rnorm(input$n), xlim = c(-4, 4))
+    hist(rnorm(20), xlim = c(-4, 4))
   })
 
 }
