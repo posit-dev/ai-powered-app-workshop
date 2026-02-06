@@ -23,13 +23,14 @@ server <- function(input, output) {
     rnorm(input$n)
   })
 
+  output$hist <- renderPlot({
+    hist(dataset(), xlim = c(-4, 4), ylim = c(0, 30))
+  })
+
   output$table <- renderPrint({
     summary(dataset())
   })
 
-  output$hist <- renderPlot({
-    hist(dataset(), xlim = c(-4, 4))
-  })
 }
 
 shinyApp(ui, server)

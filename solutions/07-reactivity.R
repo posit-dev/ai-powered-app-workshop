@@ -1,4 +1,4 @@
-# 6. Change a value to an input value to create reactivity
+# 7. Change a value to an input value to create reactivity
 
 library(shiny)
 library(bslib)
@@ -13,7 +13,8 @@ ui <- page_sidebar(
       value = 20
     )
   ), 
-    plotOutput("hist")
+    plotOutput("hist"),
+    verbatimTextOutput("table")
 )
 
 server <- function(input, output) {
@@ -22,6 +23,10 @@ server <- function(input, output) {
     hist(rnorm(input$n), xlim = c(-4, 4), ylim = c(0, 30))
   })
 
+  output$table <- renderPrint({
+    summary(rnorm(input$n))
+  })
+  
 }
 
 shinyApp(ui, server)

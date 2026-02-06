@@ -1,4 +1,4 @@
-# 7. Add a table
+# 6. Add a summary table
 
 library(shiny)
 library(bslib)
@@ -20,11 +20,11 @@ ui <- page_sidebar(
 server <- function(input, output) {
 
   output$hist <- renderPlot({
-    hist(rnorm(input$n), xlim = c(-4, 4))
+    hist(rnorm(100), xlim = c(-4, 4), ylim = c(0, 30))
   })
 
-    output$table <- renderPrint({
-    summary(rnorm(input$n))
+  output$table <- renderPrint({
+    summary(rnorm(100))
   })
   
 }
