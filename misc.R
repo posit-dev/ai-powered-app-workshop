@@ -11,5 +11,5 @@ peachtree_lottery <- readRDS("peachtree_lottery.RDS")
 source("lottery_helpers.R")
 
 create_lottery_map(peachtree_lottery, per_capita = TRUE)
-plot_per_capita_spend(peachtree_lottery, income)
 datatable(peachtree_lottery)
+plot_per_capita_spend(peachtree_lottery, income)
