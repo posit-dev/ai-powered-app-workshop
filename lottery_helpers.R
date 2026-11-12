@@ -23,40 +23,49 @@ options(tigris_use_cache = TRUE)
 #'   [leaflet::colorNumeric()]. Defaults to `"YlOrRd"`.
 #'
 #' @return A `leaflet` map widget.
-create_lottery_map <- function(data,
-                               per_capita = FALSE,
-                               state_fips = "13",
-                               palette = "YlOrRd") {
-  
-  county_totals <- 
+create_lottery_map <- function(
+  data,
+  per_capita = FALSE,
+  state_fips = "13",
+  palette = "YlOrRd"
+) {
+  county_totals <-
     if (per_capita) {
       data |>
         group_by(county) |>
-        summarise(dollars = sum(sales, na.rm = TRUE) / sum(n, na.rm = TRUE), .groups = "drop")
+        summarise(
+          dollars = sum(sales, na.rm = TRUE) / sum(n, na.rm = TRUE),
+          .groups = "drop"
+        )
     } else {
       data |>
         group_by(county) |>
         summarise(dollars = sum(sales, na.rm = TRUE), .groups = "drop")
-    } 
-  
-  counties_geo <- counties(state = state_fips, cb = TRUE, year = 2021, progress_bar = FALSE) |>
-    st_transform(4326) |>  # Transform to WGS84 (EPSG:4326) to avoid datum warning
+    }
+
+  counties_geo <- counties(
+    state = state_fips,
+    cb = TRUE,
+    year = 2021,
+    progress_bar = FALSE
+  ) |>
+    st_transform(4326) |> # Transform to WGS84 (EPSG:4326) to avoid datum warning
     mutate(county = NAME)
-  
+
   map_data <- counties_geo |>
     left_join(county_totals, by = "county") |>
     mutate(dollars = replace_na(dollars, 0))
-  
+
   pal <- colorNumeric(
     palette = palette,
-    domain = map_data$Rate,
+    domain = map_data$dollars,
     na.color = "#808080"
   )
 
   leaflet(map_data) |>
     addTiles() |>
     addPolygons(
-      fillColor = ~pal(dollars),
+      fillColor = ~ pal(dollars),
       fillOpacity = 0.7,
       color = "#FFFFFF",
       weight = 1,
@@ -67,7 +76,11 @@ create_lottery_map <- function(data,
         fillOpacity = 0.9,
         bringToFront = TRUE
       ),
-      label = ~paste0(county, ": $", format(round(dollars, 2), nsmall = 2, big.mark = ",")),
+      label = ~ paste0(
+        county,
+        ": $",
+        format(round(dollars, 2), nsmall = 2, big.mark = ",")
+      ),
       labelOptions = labelOptions(
         style = list("font-weight" = "normal", padding = "3px 8px"),
         textsize = "15px",
@@ -97,4 +110,3 @@ create_lottery_map <- function(data,
 #'   `"steelblue"`.
 #'
 #' @return A `ggplot` object.
-
